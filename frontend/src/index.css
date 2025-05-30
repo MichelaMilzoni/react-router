@@ -1,0 +1,15 @@
+/* frontend/src/index.css */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+/* @import 'bootstrap-icons/font/bootstrap-icons.css'; */ /* Se installi anche le icone Bootstrap */
+
+/* Stili generali, pulisci o modifica quelli predefiniti di Vite */
+body {
+  padding-top: 56px; /* Spazio per la navbar fissa */
+  background-color: #f8f9fa;
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  /* Rimuovi o modifica padding se il Layout già ne ha */
+}
