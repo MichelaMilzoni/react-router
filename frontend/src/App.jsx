@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// frontend/src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Importa i componenti delle pagine
+import HomePage from './pages/HomePage';
+import PostsListPage from './pages/PostsListPage';
+import AboutPage from './pages/AboutPage';
+
+// Importa il componente Layout
+import Layout from './components/Layout';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        {/* Il Layout avvolge tutte le rotte per centralizzare la Navbar e il footer */}
+        <Route path="/" element={<Layout />}>
+          {/* Le rotte figlie vengono renderizzate nell'Outlet del Layout */}
+          <Route index element={<HomePage />} /> {/* La rotta di default per "/" */}
+          <Route path="posts" element={<PostsListPage />} />
+          <Route path="about" element={<AboutPage />} />
 
-export default App
+          {/* Rotta per gestire URL non trovati (pagina 404) */}
+          <Route path="*" element={
+            <div className="text-center p-5 bg-white rounded shadow-sm">
+              <h1 className="display-4 text-danger">404</h1>
+              <p className="lead">Pagina Non Trovata!</p>
+              <a href="/" className="btn btn-primary mt-3">Torna alla Home</a>
+            </div>
+          } />
+        </Route>
+      </Routes>
+    </Router>
+  );
+}
+export default App;
